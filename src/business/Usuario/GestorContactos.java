@@ -60,7 +60,7 @@ public class GestorContactos {
 
     public void GetContactById(String email){
         ContactoDAO contactoDAO = new ContactoDAO();
-       ;
+       
         Hashtable<String,String> query = contactoDAO.ObtenerContacto(email);
 
         System.out.println("Email: "+query.get("Email"));
