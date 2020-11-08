@@ -1,5 +1,6 @@
 package business.Anuncios;
 
 public enum TiposAnuncio {
-    Tematico
+    Tematico,
+    General
 }
