@@ -36,7 +36,6 @@ public abstract class Anuncio {
     }
     
     public void setTipoAnuncio(TiposAnuncio tipoAnuncio){
-        //TODO
         this.tipoAnuncio=tipoAnuncio;
     }
 
