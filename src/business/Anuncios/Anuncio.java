@@ -35,9 +35,7 @@ public abstract class Anuncio {
         return this.tipoAnuncio;
     }
     
-    public void setTipoAnuncio(TiposAnuncio tipoAnuncio){
-        this.tipoAnuncio=tipoAnuncio;
-    }
+   
 
     public String getTituloAnuncio(){
         return this.titulo;
