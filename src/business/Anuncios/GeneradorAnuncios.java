@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import business.Usuario.Contacto;
 import business.Usuario.GestorContactos;
+import data.dao.Anuncios.AnunciosDAO;
 
 public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
@@ -106,7 +107,10 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         //TODO hacer temas
 
         int id=0;
-        //TODO hacer id
+        
+        AnunciosDAO anuncioDAO=new AnunciosDAO();
+        id=anuncioDAO.GetMaxID();
+
 
         AnuncioTematico anuncio= new AnuncioTematico(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios, temas);
         
