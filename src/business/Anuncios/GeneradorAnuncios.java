@@ -105,7 +105,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         ArrayList<String>temas = new ArrayList<String>();
         //TODO hacer temas
-
+        
         int id=0;
         
         AnunciosDAO anuncioDAO=new AnunciosDAO();
@@ -114,8 +114,8 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         AnuncioTematico anuncio= new AnuncioTematico(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios, temas);
         
-        //TODO insertar anuncio en la base de datos
         
+        anuncioDAO.InsertarAnuncioTematico(anuncio);
         sc.close();
         return null;
     }

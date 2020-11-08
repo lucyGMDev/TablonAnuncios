@@ -26,8 +26,8 @@ public class ContactoDAO extends DAO {
             ps.setString(3, contact.getLastName());
             java.sql.Date birthDate = new java.sql.Date(contact.getBirthDate().getTime());
             ps.setDate(4, birthDate);
-            String intereses="";
             
+            String intereses="";            
             for(String interes : contact.getTagsLists()){
                 interes+=interes.toLowerCase()+",";
             }
@@ -35,6 +35,7 @@ public class ContactoDAO extends DAO {
                 intereses=intereses.substring(0,intereses.length()-1);
             }
             ps.setString(5, intereses);
+            
             status = ps.executeUpdate();
         }catch(Exception e){
             System.out.println(e);

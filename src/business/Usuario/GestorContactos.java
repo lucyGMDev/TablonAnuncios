@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.Locale;
 
 import data.dao.Usuario.ContactoDAO;
 
@@ -62,13 +63,17 @@ public class GestorContactos {
     }
 
     public Contacto GetContactById(String email){
+        if(!ContactExits(email)){
+            System.out.println("No hay ningun contacto en la base de datos con el siguiente email: "+email);
+            return null;
+        }
         ContactoDAO contactoDAO = new ContactoDAO();
         Contacto contact=null;
         Hashtable<String,String> query = contactoDAO.ObtenerContacto(email);
         String nombre=query.get("Nombre");
         String apellidos=query.get("Apellidos");
 
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH);
         Date fechaNacimiento=null;
         try{
             fechaNacimiento=dateFormat.parse(query.get("Fecha_Nacimiento"));
