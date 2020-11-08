@@ -3,6 +3,6 @@ package business.Anuncios;
 public enum EstadosAnuncio {
     editado,
     enEspera,
-    publciado,
+    publicado,
     archivado
 }

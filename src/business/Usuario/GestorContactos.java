@@ -1,6 +1,9 @@
 package business.Usuario;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 
@@ -58,17 +61,37 @@ public class GestorContactos {
         contactoDAO.ModificarContacto(contact);
     }
 
-    public void GetContactById(String email){
+    public Contacto GetContactById(String email){
         ContactoDAO contactoDAO = new ContactoDAO();
-       
+        Contacto contact=null;
         Hashtable<String,String> query = contactoDAO.ObtenerContacto(email);
+        String nombre=query.get("Nombre");
+        String apellidos=query.get("Apellidos");
 
-        System.out.println("Email: "+query.get("Email"));
-        System.out.println("Nombre: "+query.get("Nombre"));
-        System.out.println("Apellidos: "+query.get("Apellidos"));
-        System.out.println("Fecha Nacimiento: "+query.get("Fecha_Nacimiento"));
-        System.out.println("Intereses: "+query.get("Intereses"));
-        return;
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        Date fechaNacimiento=null;
+        try{
+            fechaNacimiento=dateFormat.parse(query.get("Fecha_Nacimiento"));
+        }catch(Exception error){
+            error.printStackTrace();
+            return null;
+        }
+
+        ArrayList<String> intereses= new ArrayList<String>(Arrays.asList(query.get("Intereses").split(",")));
+        contact = new Contacto(email,nombre,apellidos,fechaNacimiento,intereses);
+
+        
+        return contact;
+    }
+
+    public boolean ContactExits(String email){
+        ContactoDAO contactoDAO = new ContactoDAO();
+        
+        if(contactoDAO.ObtenerContacto(email).isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
 
