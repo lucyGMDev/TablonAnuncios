@@ -110,6 +110,8 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         
         
         anuncioDAO.InsertarAnuncioTematico(anuncio);
+
+        
         sc.close();
 
         return anuncio;

@@ -53,7 +53,7 @@ public class ContactoDAO extends DAO {
             PreparedStatement ps=conect.prepareStatement(sqlProp.getProperty("borrar.contacto"));
             ps.setString(1, contact.getEmail());
             status=ps.executeUpdate();
-
+            conect.close();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -115,7 +115,7 @@ public class ContactoDAO extends DAO {
                 ret.put("Fecha_Nacimiento",_fechaNacimiento.toString());
                 ret.put("Intereses", _intereses);
             }
-           
+           conect.close();
         }catch(Exception e){
             System.out.println(e);
         }

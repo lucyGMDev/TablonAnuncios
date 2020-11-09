@@ -54,8 +54,8 @@ public class AnunciosDAO extends DAO{
             ps.setString(1, anuncio.getTipoAnuncio().toString());
             ps.setString(2, anuncio.getTituloAnuncio());
             ps.setString(3, anuncio.getCuerpoAnuncio());
-            // java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
-            java.sql.Date fechaPublicacion=java.sql.Date.valueOf(anuncio.getFechaPublicacion().toString());
+             java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
+            //java.sql.Date fechaPublicacion=java.sql.Date.valueOf(anuncio.getFechaPublicacion().toString());
             ps.setDate(4, fechaPublicacion);
             ps.setString(5, anuncio.getPropietario().getEmail());
             ps.setString(6, anuncio.getEsadoAnuncio().toString());
@@ -79,7 +79,7 @@ public class AnunciosDAO extends DAO{
             }
 
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return status;
     }
