@@ -7,8 +7,8 @@ public class tests {
     public static void main(String[]args){
         GeneradorAnuncios generadorAnuncios=new GeneradorAnuncios();
         
-        generadorAnuncios.CrearAnuncioTematico(GestorContactos.GetInstance().GetContactById("i92izded@uco.es"));
-        
+        int i=generadorAnuncios.CrearAnuncioGeneral(GestorContactos.GetInstance().GetContactById("i92izded@uco.es")).getId();
+        System.out.println("El id es "+i);
         return;
     }
 }

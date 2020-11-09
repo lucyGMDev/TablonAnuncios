@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
+import business.Anuncios.AnuncioFlash;
 import business.Anuncios.AnuncioGeneral;
 import business.Anuncios.AnuncioTematico;
 import business.Usuario.Contacto;
@@ -108,9 +109,21 @@ public class AnunciosDAO extends DAO{
                 psDestinatario.setString(2, c.getEmail());
                 psDestinatario.executeUpdate();
             }
-            
+
         }catch(Exception e){
             System.out.println(e);
+        }
+
+        return status;
+    }
+
+    public int InsertarAnuncioFlash(AnuncioFlash anuncio){
+        int status=0;
+
+        try{
+            //TODO hacer la inserccion en la base de datos
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
         return status;
