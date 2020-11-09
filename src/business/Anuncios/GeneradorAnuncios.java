@@ -15,6 +15,7 @@ import data.dao.Anuncios.AnuncioDAO;
 public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
     //TODO En general corregir el tema de las fechas, no se guardan bien las horas
+    //TODO En general modificar las llamadas a los DAO pasandoles DTO
     @Override
     public AnuncioTematico CrearAnuncioTematico(Contacto propietario){
         Scanner sc = new Scanner(System.in);
@@ -84,7 +85,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
                 }else{
                     estadoAnuncio=EstadoAnuncio.publicado;
                 }
-                estadoAnuncio=EstadoAnuncio.publicado;
+                
             break;
             case 2:
                 estadoAnuncio=EstadoAnuncio.editado;
@@ -192,7 +193,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
                 }else{
                     estadoAnuncio=EstadoAnuncio.publicado;
                 }
-                estadoAnuncio=EstadoAnuncio.publicado;
+
             break;
             case 2:
                 estadoAnuncio=EstadoAnuncio.editado;
@@ -416,7 +417,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
                 }else{
                     estadoAnuncio=EstadoAnuncio.publicado;
                 }
-                estadoAnuncio=EstadoAnuncio.publicado;
+                
             break;
             case 2:
                 estadoAnuncio=EstadoAnuncio.editado;
@@ -434,8 +435,9 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         anuncio = new AnuncioIndividualizado(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
 
-        //TODO insertar el anuncio en la base de datos
+ 
         
+        anuncioDAO.InsertarAnuncioIndividualizado(anuncio);
 
         
         id=anuncioDAO.GetMaxID();

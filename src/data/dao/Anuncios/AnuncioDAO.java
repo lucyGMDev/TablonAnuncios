@@ -16,7 +16,7 @@ import business.Usuario.Contacto;
 import data.dao.common.DAO;
 
 public class AnuncioDAO extends DAO{
-   
+   //TODO modificar llamadas a las insercciones para usar DTO en vez de clases anuncios
    
     public int GetMaxID(){
         int maxID=-1;
@@ -72,10 +72,11 @@ public class AnuncioDAO extends DAO{
 
             status=ps.executeUpdate();
 
-            for(Contacto contact:anuncio.getDestinatarios()){
+            int idAnuncio=GetMaxID();
+            for(Contacto c : anuncio.getDestinatarios()){
                 PreparedStatement psDestinatario=conect.prepareStatement(sqlProp.getProperty("insertar.Destinatario"));
-                psDestinatario.setInt(1, anuncio.getId());
-                psDestinatario.setString(2, contact.getEmail());
+                psDestinatario.setInt(1, idAnuncio);
+                psDestinatario.setString(2, c.getEmail());
                 psDestinatario.executeUpdate();
             }
 
@@ -104,9 +105,10 @@ public class AnuncioDAO extends DAO{
             status=ps.executeUpdate();
 
             
+            int idAnuncio=GetMaxID();
             for(Contacto c : anuncio.getDestinatarios()){
                 PreparedStatement psDestinatario=conect.prepareStatement(sqlProp.getProperty("insertar.Destinatario"));
-                psDestinatario.setInt(1, anuncio.getId());
+                psDestinatario.setInt(1, idAnuncio);
                 psDestinatario.setString(2, c.getEmail());
                 psDestinatario.executeUpdate();
             }
@@ -140,9 +142,10 @@ public class AnuncioDAO extends DAO{
             
             status=ps.executeUpdate();
 
+            int idAnuncio=GetMaxID();
             for(Contacto c : anuncio.getDestinatarios()){
                 PreparedStatement psDestinatario=conect.prepareStatement(sqlProp.getProperty("insertar.Destinatario"));
-                psDestinatario.setInt(1, anuncio.getId());
+                psDestinatario.setInt(1, idAnuncio);
                 psDestinatario.setString(2, c.getEmail());
                 psDestinatario.executeUpdate();
             }
@@ -159,9 +162,30 @@ public class AnuncioDAO extends DAO{
         int status=0;
 
         try{
-            //TODO Realizar la inserccion
+            Connection conect = getConection();
+            Properties sqlProp = new Properties();
+            InputStream is = new FileInputStream("sql.properties");
+            sqlProp.load(is);
+            PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("insertar.AnuncioIndividualizado"));
+            ps.setString(1, anuncio.getTipoAnuncio().toString());
+            ps.setString(2,anuncio.getTituloAnuncio());
+            ps.setString(3,anuncio.getCuerpoAnuncio());
+            java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
+            ps.setDate(4, fechaPublicacion);
+            ps.setString(5,anuncio.getPropietario().getEmail());
+            ps.setString(6,anuncio.getEsadoAnuncio().toString());
+            status=ps.executeUpdate();
+
+            int idAnuncio=GetMaxID();
+            for(Contacto c : anuncio.getDestinatarios()){
+                PreparedStatement psDestinatario=conect.prepareStatement(sqlProp.getProperty("insertar.Destinatario"));
+                psDestinatario.setInt(1, idAnuncio);
+                psDestinatario.setString(2, c.getEmail());
+                psDestinatario.executeUpdate();
+            }
+
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e);
         }
 
         return status;

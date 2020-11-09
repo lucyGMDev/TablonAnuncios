@@ -91,18 +91,20 @@ public class ContactoDAO extends DAO {
     }
 
     public Hashtable<String,String> ObtenerContacto(String email){
-        Hashtable<String,String> ret = null;
+        Hashtable<String,String> ret = new Hashtable<String,String>();
         try{
             
             Connection conect = getConection();
+            
             Properties sqlProp = new Properties();
             InputStream is = new FileInputStream("sql.properties");
             sqlProp.load(is);
             PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("getById.contacto"));
             ps.setString(1, email);
             ResultSet rs=ps.executeQuery();
+                 
             while(rs.next()){
-                
+                System.out.println("Entro");
                 String _email=rs.getString(1);
                 String _nombre=rs.getString(2);
                 String _apellidos=rs.getString(3);
@@ -115,7 +117,8 @@ public class ContactoDAO extends DAO {
                 ret.put("Fecha_Nacimiento",_fechaNacimiento.toString());
                 ret.put("Intereses", _intereses);
             }
-           conect.close();
+            
+           
         }catch(Exception e){
             System.out.println(e);
         }
