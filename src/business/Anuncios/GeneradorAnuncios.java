@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 import business.Usuario.Contacto;
@@ -13,7 +14,7 @@ import data.dao.Anuncios.AnunciosDAO;
 
 public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
-    
+    //TODO En general corrgir el tema de las fechas, no se guardan bien las horas
     @Override
     public AnuncioTematico CrearAnuncioTematico(Contacto propietario){
         Scanner sc = new Scanner(System.in);
@@ -35,8 +36,8 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         } while (!linea.toLowerCase().equals("exit"));
 
         Date fechaPublicacion=null;
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-        System.out.println("Indique la fecha de publicacion del anuncio(Ejemplo de formato 16:50:50 17/11/2020)");
+        DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH);
+        System.out.println("Indique la fecha de publicacion del anuncio(Ejemplo de formato Sat Nov 07 16:50:50 CET 2020)");
         String fechaString = sc.nextLine();
         try {
             fechaPublicacion = dateFormat.parse(fechaString);

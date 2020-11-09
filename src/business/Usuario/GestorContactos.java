@@ -72,7 +72,7 @@ public class GestorContactos {
         Hashtable<String,String> query = contactoDAO.ObtenerContacto(email);
         String nombre=query.get("Nombre");
         String apellidos=query.get("Apellidos");
-
+        
         DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH);
         Date fechaNacimiento=null;
         try{

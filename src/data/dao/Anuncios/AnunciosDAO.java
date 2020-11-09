@@ -54,8 +54,7 @@ public class AnunciosDAO extends DAO{
             ps.setString(1, anuncio.getTipoAnuncio().toString());
             ps.setString(2, anuncio.getTituloAnuncio());
             ps.setString(3, anuncio.getCuerpoAnuncio());
-             java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
-            //java.sql.Date fechaPublicacion=java.sql.Date.valueOf(anuncio.getFechaPublicacion().toString());
+            java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
             ps.setDate(4, fechaPublicacion);
             ps.setString(5, anuncio.getPropietario().getEmail());
             ps.setString(6, anuncio.getEsadoAnuncio().toString());
@@ -93,7 +92,23 @@ public class AnunciosDAO extends DAO{
             InputStream is = new FileInputStream("sql.properties");
             sqlProp.load(is);
             PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("insertar.AnuncioGeneral"));
-            //TODO terminar 
+            ps.setString(1, anuncio.getTipoAnuncio().toString());
+            ps.setString(2,anuncio.getTituloAnuncio());
+            ps.setString(3,anuncio.getCuerpoAnuncio());
+            java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
+            ps.setDate(4, fechaPublicacion);
+            ps.setString(5,anuncio.getPropietario().getEmail());
+            ps.setString(6,anuncio.getEsadoAnuncio().toString());
+            status=ps.executeUpdate();
+
+            
+            for(Contacto c : anuncio.getDestinatarios()){
+                PreparedStatement psDestinatario=conect.prepareStatement(sqlProp.getProperty("insertar.Destinatario"));
+                psDestinatario.setInt(1, anuncio.getId());
+                psDestinatario.setString(2, c.getEmail());
+                psDestinatario.executeUpdate();
+            }
+            
         }catch(Exception e){
             System.out.println(e);
         }
