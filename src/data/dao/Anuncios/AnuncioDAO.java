@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import business.Anuncios.AnuncioFlash;
 import business.Anuncios.AnuncioGeneral;
+import business.Anuncios.AnuncioIndividualizado;
 import business.Anuncios.AnuncioTematico;
 import business.Usuario.Contacto;
 import data.dao.common.DAO;
@@ -146,6 +147,19 @@ public class AnuncioDAO extends DAO{
                 psDestinatario.executeUpdate();
             }
 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+
+    public int InsertarAnuncioIndividualizado(AnuncioIndividualizado anuncio){
+        int status=0;
+
+        try{
+            //TODO Realizar la inserccion
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -340,6 +340,110 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
 
     }
+
+    @Override
+    public AnuncioIndividualizado CrearAnuncioIndividualizado(Contacto propietario) {
+        Scanner sc = new Scanner(System.in);
+        AnuncioIndividualizado anuncio=null;
+
+        System.out.println("Introduce el titulo de tu anuncio");
+        String titulo=sc.nextLine();
+        
+        
+        System.out.println("Introduce el cuerpo de tu anuncio(Introduce texto hasta que escribas una linea con exit): ");
+        String cuerpoAnuncio = "";
+        String linea;
+        do {
+            linea = sc.nextLine();
+            if (!linea.toLowerCase().equals("exit")) {
+                if(!cuerpoAnuncio.equals(""))
+                    cuerpoAnuncio+="\n";
+                cuerpoAnuncio += linea;
+                
+            }
+        } while (!linea.toLowerCase().equals("exit"));
+
+        Date fechaPublicacion=null;
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        System.out.println("Indique la fecha de publicacion del anuncio(Ejemplo de formato 16:50:50 17/11/2020)");
+        String fechaString = sc.nextLine();
+        try {
+            fechaPublicacion = dateFormat.parse(fechaString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            sc.close();
+            return null;
+        }
+        
+
+
+        ArrayList<Contacto> destinatarios=new ArrayList<Contacto>();
+        boolean introducirDestinatarios=true;
+        
+        do{
+            System.out.println("Introduce el correo de un contacto para introducirlo en tus destinatarios o exit para terminar:");
+            String correo=sc.nextLine();
+            if(correo.toLowerCase().equals("exit")){   
+                if(destinatarios.isEmpty()){
+                    System.out.println("Es un anuncio individualizado, tienes que introducir al menos un destinatario");
+                }else{             
+                    introducirDestinatarios=false;    
+                }            
+            }else{
+                if(GestorContactos.GetInstance().ContactExits(correo)){                    
+                    Contacto contacto = GestorContactos.GetInstance().GetContactById(correo);
+                    if(!destinatarios.contains(contacto)){
+                        destinatarios.add(contacto);
+                    }else{
+                        System.out.println("Este contacto ya sea añadido");
+                    }
+                }else{
+                    System.out.println("El contacto introducido no existe");
+                }
+            }
+
+        }while(introducirDestinatarios);
+
+        EstadoAnuncio estadoAnuncio;
+        System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
+        System.out.println("1: Publicar");
+        System.out.println("2: Edicion");
+        int option=Integer.parseInt(sc.nextLine());
+        switch(option){
+            case 1:
+                if(fechaPublicacion.after(new Date(System.currentTimeMillis()))){
+                    estadoAnuncio=EstadoAnuncio.enEspera;
+                }else{
+                    estadoAnuncio=EstadoAnuncio.publicado;
+                }
+                estadoAnuncio=EstadoAnuncio.publicado;
+            break;
+            case 2:
+                estadoAnuncio=EstadoAnuncio.editado;
+            break;
+            default:
+                System.out.println("Opcion no contempladad");
+                sc.close();
+                return null;
+            
+        }
+
+        int id=0;        
+        AnuncioDAO anuncioDAO=new AnuncioDAO();
+        
+
+        anuncio = new AnuncioIndividualizado(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
+
+        //TODO insertar el anuncio en la base de datos
+        
+
+        
+        id=anuncioDAO.GetMaxID();
+        anuncio.setId(id);
+
+        sc.close();
+        return anuncio;
+    }
     
     
     

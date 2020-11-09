@@ -10,4 +10,6 @@ public abstract class GeneradorAnunciosAbstracto {
     public abstract AnuncioGeneral CrearAnuncioGeneral(Contacto propietario);    
     
     public abstract AnuncioFlash CrearAnuncioFlash(Contacto propietario); 
+
+    public abstract AnuncioIndividualizado CrearAnuncioIndividualizado(Contacto propietario); 
 }
