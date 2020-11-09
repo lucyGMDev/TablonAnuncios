@@ -5,18 +5,19 @@ import java.util.Date;
 
 import business.Usuario.Contacto;
 
+
 public abstract class Anuncio {
     protected int id;
-    protected TiposAnuncio tipoAnuncio;
+    protected TipoAnuncio tipoAnuncio;
     protected String titulo;
     protected String cuerpo;
     protected Date fecha_publicacion;
     protected Contacto propietario;
-    protected EstadosAnuncio estadoAnuncio;
+    protected EstadoAnuncio estadoAnuncio;
     protected ArrayList<Contacto> destinatarios;
 
-    public Anuncio(int id, TiposAnuncio tipoAnuncio, String titulo, String cuerpo, Date fecha_publicacion,
-            Contacto propietario, EstadosAnuncio estadoAnuncio, ArrayList<Contacto> destinatarios) {
+    public Anuncio(int id, TipoAnuncio tipoAnuncio, String titulo, String cuerpo, Date fecha_publicacion,
+            Contacto propietario, EstadoAnuncio estadoAnuncio, ArrayList<Contacto> destinatarios) {
         this.id = id;
         this.tipoAnuncio = tipoAnuncio;
         this.titulo = titulo;
@@ -34,7 +35,7 @@ public abstract class Anuncio {
         return this.id;
     }
 
-    public TiposAnuncio getTipoAnuncio(){
+    public TipoAnuncio getTipoAnuncio(){
         return this.tipoAnuncio;
     }
     
@@ -72,11 +73,11 @@ public abstract class Anuncio {
         this.propietario=propietario;
     }
 
-    public EstadosAnuncio getEsadoAnuncio(){
+    public EstadoAnuncio getEsadoAnuncio(){
         return this.estadoAnuncio;
     }
 
-    public void setEstadoAnuncio(EstadosAnuncio estadoAnuncio){
+    public void setEstadoAnuncio(EstadoAnuncio estadoAnuncio){
         this.estadoAnuncio=estadoAnuncio;
     }
 

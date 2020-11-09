@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import business.Usuario.Contacto;
 import business.Usuario.GestorContactos;
-import data.dao.Anuncios.AnunciosDAO;
+import data.dao.Anuncios.AnuncioDAO;
 
 public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
@@ -72,7 +72,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         }while(introducirDestinatarios);
 
-        EstadosAnuncio estadoAnuncio;
+        EstadoAnuncio estadoAnuncio;
         System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
         System.out.println("1: Publicar");
         System.out.println("2: Edicion");
@@ -80,14 +80,14 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         switch(option){
             case 1:
                 if(fechaPublicacion.after(new Date(System.currentTimeMillis()))){
-                    estadoAnuncio=EstadosAnuncio.enEspera;
+                    estadoAnuncio=EstadoAnuncio.enEspera;
                 }else{
-                    estadoAnuncio=EstadosAnuncio.publicado;
+                    estadoAnuncio=EstadoAnuncio.publicado;
                 }
-                estadoAnuncio=EstadosAnuncio.publicado;
+                estadoAnuncio=EstadoAnuncio.publicado;
             break;
             case 2:
-                estadoAnuncio=EstadosAnuncio.editado;
+                estadoAnuncio=EstadoAnuncio.editado;
             break;
             default:
                 System.out.println("Opcion no contempladad");
@@ -103,7 +103,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         
         int id=0;
         
-        AnunciosDAO anuncioDAO=new AnunciosDAO();
+        AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
 
@@ -180,7 +180,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         }while(introducirDestinatarios);
 
-        EstadosAnuncio estadoAnuncio;
+        EstadoAnuncio estadoAnuncio;
         System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
         System.out.println("1: Publicar");
         System.out.println("2: Edicion");
@@ -188,14 +188,14 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         switch(option){
             case 1:
                 if(fechaPublicacion.after(new Date(System.currentTimeMillis()))){
-                    estadoAnuncio=EstadosAnuncio.enEspera;
+                    estadoAnuncio=EstadoAnuncio.enEspera;
                 }else{
-                    estadoAnuncio=EstadosAnuncio.publicado;
+                    estadoAnuncio=EstadoAnuncio.publicado;
                 }
-                estadoAnuncio=EstadosAnuncio.publicado;
+                estadoAnuncio=EstadoAnuncio.publicado;
             break;
             case 2:
-                estadoAnuncio=EstadosAnuncio.editado;
+                estadoAnuncio=EstadoAnuncio.editado;
             break;
             default:
                 System.out.println("Opcion no contempladad");
@@ -205,7 +205,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         }
 
         int id=0;        
-        AnunciosDAO anuncioDAO=new AnunciosDAO();
+        AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
         anuncio = new AnuncioGeneral(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
@@ -296,7 +296,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         }while(introducirDestinatarios);
 
-        EstadosAnuncio estadoAnuncio;
+        EstadoAnuncio estadoAnuncio;
         System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
         System.out.println("1: Publicar");
         System.out.println("2: Edicion");
@@ -304,17 +304,17 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         switch(option){
             case 1:
                 if(fechaPublicacion.after(new Date(System.currentTimeMillis()))){
-                    estadoAnuncio=EstadosAnuncio.enEspera;
+                    estadoAnuncio=EstadoAnuncio.enEspera;
                 }else if(fecha_fin.before(new Date(System.currentTimeMillis()))){
-                    estadoAnuncio=EstadosAnuncio.archivado;
+                    estadoAnuncio=EstadoAnuncio.archivado;
                 }
                 else{
-                    estadoAnuncio=EstadosAnuncio.publicado;
+                    estadoAnuncio=EstadoAnuncio.publicado;
                 }
                
             break;
             case 2:
-                estadoAnuncio=EstadosAnuncio.editado;
+                estadoAnuncio=EstadoAnuncio.editado;
             break;
             default:
                 System.out.println("Opcion no contempladad");
@@ -324,13 +324,13 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         }
 
         int id=0;        
-        AnunciosDAO anuncioDAO=new AnunciosDAO();
+        AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
         anuncio = new AnuncioFlash(id, titulo, cuerpoAnuncio, fechaPublicacion,fecha_fin, propietario, estadoAnuncio, destinatarios);
 
         
-        //TODO insertar en la base de datos
+        anuncioDAO.InsertarAnuncioFlash(anuncio);
        
         id=anuncioDAO.GetMaxID();
         anuncio.setId(id);

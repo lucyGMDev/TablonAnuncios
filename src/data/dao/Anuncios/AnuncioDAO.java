@@ -14,7 +14,7 @@ import business.Anuncios.AnuncioTematico;
 import business.Usuario.Contacto;
 import data.dao.common.DAO;
 
-public class AnunciosDAO extends DAO{
+public class AnuncioDAO extends DAO{
    
    
     public int GetMaxID(){
@@ -121,7 +121,31 @@ public class AnunciosDAO extends DAO{
         int status=0;
 
         try{
-            //TODO hacer la inserccion en la base de datos
+            
+            Connection conect = getConection();
+            Properties sqlProp = new Properties();
+            InputStream is = new FileInputStream("sql.properties");
+            sqlProp.load(is);
+            PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("insertar.AnuncioFlash"));
+            ps.setString(1, anuncio.getTipoAnuncio().toString());
+            ps.setString(2, anuncio.getTituloAnuncio());
+            ps.setString(3, anuncio.getCuerpoAnuncio());
+            java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
+            ps.setDate(4, fechaPublicacion);
+            java.sql.Date fecha_fin=new java.sql.Date(anuncio.getFechaFin().getTime());
+            ps.setDate(5, fecha_fin);
+            ps.setString(6, anuncio.getPropietario().getEmail());
+            ps.setString(7, anuncio.getEsadoAnuncio().toString());
+            
+            status=ps.executeUpdate();
+
+            for(Contacto c : anuncio.getDestinatarios()){
+                PreparedStatement psDestinatario=conect.prepareStatement(sqlProp.getProperty("insertar.Destinatario"));
+                psDestinatario.setInt(1, anuncio.getId());
+                psDestinatario.setString(2, c.getEmail());
+                psDestinatario.executeUpdate();
+            }
+
         }catch(Exception e){
             e.printStackTrace();
         }

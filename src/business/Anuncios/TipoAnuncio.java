@@ -1,6 +1,6 @@
 package business.Anuncios;
 
-public enum TiposAnuncio {
+public enum TipoAnuncio {
     Tematico,
     General,
     Flash

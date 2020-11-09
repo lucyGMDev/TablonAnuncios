@@ -1,6 +1,6 @@
 package business.Anuncios;
 
-public enum EstadosAnuncio {
+public enum EstadoAnuncio {
     editado,
     enEspera,
     publicado,
