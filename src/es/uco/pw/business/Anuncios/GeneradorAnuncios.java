@@ -13,6 +13,7 @@ import java.util.Scanner;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioFlashDTO;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioGeneralDTO;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioIndividualizadoDTO;
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioTematicoDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.business.Usuario.GestorContactos;
 import es.uco.pw.data.dao.Anuncios.AnuncioDAO;
@@ -21,7 +22,7 @@ import es.uco.pw.data.dao.Intereses.InteresesDAO;
 public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
     //TODO En general corregir el tema de las fechas, no se guardan bien las horas
-    //TODO En general modificar las llamadas a los DAO pasandoles DTO
+    
     @Override
     public AnuncioTematico CrearAnuncioTematico(Contacto propietario){
         Scanner sc = new Scanner(System.in);
@@ -118,7 +119,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         }while(insertarTemas);
 
-
+        System.out.println(temas);
         EstadoAnuncio estadoAnuncio;
         System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
         System.out.println("1: Publicar");
@@ -148,13 +149,14 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
-        //TODO no se insertan los temas
+        
+        
+        AnuncioTematicoDTO anuncioDTO = new AnuncioTematicoDTO(titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios, temas);
+        anuncioDAO.InsertarAnuncioTematico(anuncioDTO);
+        id=anuncioDAO.GetMaxID();
         AnuncioTematico anuncio= new AnuncioTematico(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios, temas);
         
         
-        anuncioDAO.InsertarAnuncioTematico(anuncio);
-        id=anuncioDAO.GetMaxID();
-        anuncio.setId(id);
 
         
         sc.close();
