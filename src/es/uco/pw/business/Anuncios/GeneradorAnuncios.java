@@ -79,29 +79,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         }while(introducirDestinatarios);
 
-        EstadoAnuncio estadoAnuncio;
-        System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
-        System.out.println("1: Publicar");
-        System.out.println("2: Edicion");
-        int option=Integer.parseInt(sc.nextLine());
-        switch(option){
-            case 1:
-                if(fechaPublicacion.after(new Date(System.currentTimeMillis()))){
-                    estadoAnuncio=EstadoAnuncio.enEspera;
-                }else{
-                    estadoAnuncio=EstadoAnuncio.publicado;
-                }
-                
-            break;
-            case 2:
-                estadoAnuncio=EstadoAnuncio.editado;
-            break;
-            default:
-                System.out.println("Opcion no contempladad");
-                sc.close();
-                return null;
-            
-        }
+        
         
 
 
@@ -139,6 +117,31 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             
 
         }while(insertarTemas);
+
+
+        EstadoAnuncio estadoAnuncio;
+        System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
+        System.out.println("1: Publicar");
+        System.out.println("2: Edicion");
+        int option=Integer.parseInt(sc.nextLine());
+        switch(option){
+            case 1:
+                if(fechaPublicacion.after(new Date(System.currentTimeMillis()))){
+                    estadoAnuncio=EstadoAnuncio.enEspera;
+                }else{
+                    estadoAnuncio=EstadoAnuncio.publicado;
+                }
+                
+            break;
+            case 2:
+                estadoAnuncio=EstadoAnuncio.editado;
+            break;
+            default:
+                System.out.println("Opcion no contempladad");
+                sc.close();
+                return null;
+            
+        }
         
         int id=0;
         
