@@ -9,9 +9,10 @@ import java.sql.Statement;
 import java.util.Properties;
 
 import es.uco.pw.business.Anuncios.AnuncioFlash;
-import es.uco.pw.business.Anuncios.AnuncioGeneral;
 import es.uco.pw.business.Anuncios.AnuncioIndividualizado;
 import es.uco.pw.business.Anuncios.AnuncioTematico;
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioFlashDTO;
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioGeneralDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.data.dao.common.DAO;
 
@@ -86,7 +87,7 @@ public class AnuncioDAO extends DAO{
         return status;
     }
 
-    public int InsertarAnuncioGeneral(AnuncioGeneral anuncio){
+    public int InsertarAnuncioGeneral(AnuncioGeneralDTO anuncio){
         int status=0;
 
         try{
@@ -96,12 +97,12 @@ public class AnuncioDAO extends DAO{
             sqlProp.load(is);
             PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("insertar.AnuncioGeneral"));
             ps.setString(1, anuncio.getTipoAnuncio().toString());
-            ps.setString(2,anuncio.getTituloAnuncio());
-            ps.setString(3,anuncio.getCuerpoAnuncio());
+            ps.setString(2,anuncio.getTitulo());
+            ps.setString(3,anuncio.getCuerpo());
             java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
             ps.setDate(4, fechaPublicacion);
             ps.setString(5,anuncio.getPropietario().getEmail());
-            ps.setString(6,anuncio.getEsadoAnuncio().toString());
+            ps.setString(6,anuncio.getEstadoAnuncio().toString());
             status=ps.executeUpdate();
 
             
@@ -120,7 +121,7 @@ public class AnuncioDAO extends DAO{
         return status;
     }
 
-    public int InsertarAnuncioFlash(AnuncioFlash anuncio){
+    public int InsertarAnuncioFlash(AnuncioFlashDTO anuncio){
         int status=0;
 
         try{
@@ -131,14 +132,14 @@ public class AnuncioDAO extends DAO{
             sqlProp.load(is);
             PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("insertar.AnuncioFlash"));
             ps.setString(1, anuncio.getTipoAnuncio().toString());
-            ps.setString(2, anuncio.getTituloAnuncio());
-            ps.setString(3, anuncio.getCuerpoAnuncio());
+            ps.setString(2, anuncio.getTitulo());
+            ps.setString(3, anuncio.getCuerpo());
             java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
             ps.setDate(4, fechaPublicacion);
             java.sql.Date fecha_fin=new java.sql.Date(anuncio.getFechaFin().getTime());
             ps.setDate(5, fecha_fin);
             ps.setString(6, anuncio.getPropietario().getEmail());
-            ps.setString(7, anuncio.getEsadoAnuncio().toString());
+            ps.setString(7, anuncio.getEstadoAnuncio().toString());
             
             status=ps.executeUpdate();
 

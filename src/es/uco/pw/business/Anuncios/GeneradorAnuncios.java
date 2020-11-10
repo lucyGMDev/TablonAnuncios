@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioFlashDTO;
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioGeneralDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.business.Usuario.GestorContactos;
 import es.uco.pw.data.dao.Anuncios.AnuncioDAO;
@@ -205,17 +207,18 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             
         }
 
-        int id=0;        
+             
         AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
-        anuncio = new AnuncioGeneral(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
-
         
 
-        anuncioDAO.InsertarAnuncioGeneral(anuncio);
-        id=anuncioDAO.GetMaxID();
-        anuncio.setId(id);
+        
+        AnuncioGeneralDTO anuncioDTO=new AnuncioGeneralDTO(titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
+        anuncioDAO.InsertarAnuncioGeneral(anuncioDTO);
+        
+        int id=anuncioDAO.GetMaxID();
+        anuncio = new AnuncioGeneral(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
 
         sc.close();
         return anuncio;
@@ -328,13 +331,12 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
-        anuncio = new AnuncioFlash(id, titulo, cuerpoAnuncio, fechaPublicacion,fecha_fin, propietario, estadoAnuncio, destinatarios);
-
+        AnuncioFlashDTO anuncioDTO = new AnuncioFlashDTO(titulo, cuerpoAnuncio, fechaPublicacion, fecha_fin, propietario, estadoAnuncio, destinatarios);
         
-        anuncioDAO.InsertarAnuncioFlash(anuncio);
+        anuncioDAO.InsertarAnuncioFlash(anuncioDTO);
        
         id=anuncioDAO.GetMaxID();
-        anuncio.setId(id);
+        anuncio = new AnuncioFlash(id, titulo, cuerpoAnuncio, fechaPublicacion,fecha_fin, propietario, estadoAnuncio, destinatarios);
 
         sc.close();
         return anuncio;
