@@ -1,7 +1,7 @@
-package display;
+package es.uco.pw.display;
 
-import business.Anuncios.GeneradorAnuncios;
-import business.Usuario.GestorContactos;
+import es.uco.pw.business.Anuncios.GeneradorAnuncios;
+import es.uco.pw.business.Usuario.GestorContactos;
 
 public class tests {
     public static void main(String[]args){

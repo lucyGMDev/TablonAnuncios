@@ -1,8 +1,8 @@
-package business.Anuncios;
+package es.uco.pw.business.Anuncios;
 
 
 
-import business.Usuario.Contacto;
+import es.uco.pw.business.Usuario.Contacto;
 
 public abstract class GeneradorAnunciosAbstracto {
     public abstract AnuncioTematico CrearAnuncioTematico(Contacto propietario);

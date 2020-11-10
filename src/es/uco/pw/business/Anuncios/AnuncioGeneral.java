@@ -1,9 +1,9 @@
-package business.Anuncios;
+package es.uco.pw.business.Anuncios;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import business.Usuario.Contacto;
+import es.uco.pw.business.Usuario.Contacto;
 
 public class AnuncioGeneral extends Anuncio {
 

@@ -1,4 +1,4 @@
-package business.Usuario;
+package es.uco.pw.business.Usuario;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Locale;
 
-import data.dao.Usuario.ContactoDAO;
+import es.uco.pw.data.dao.Usuario.ContactoDAO;
 
 
 public class GestorContactos {

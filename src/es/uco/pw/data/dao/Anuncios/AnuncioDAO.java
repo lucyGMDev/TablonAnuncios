@@ -1,4 +1,4 @@
-package data.dao.Anuncios;
+package es.uco.pw.data.dao.Anuncios;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -8,12 +8,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import business.Anuncios.AnuncioFlash;
-import business.Anuncios.AnuncioGeneral;
-import business.Anuncios.AnuncioIndividualizado;
-import business.Anuncios.AnuncioTematico;
-import business.Usuario.Contacto;
-import data.dao.common.DAO;
+import es.uco.pw.business.Anuncios.AnuncioFlash;
+import es.uco.pw.business.Anuncios.AnuncioGeneral;
+import es.uco.pw.business.Anuncios.AnuncioIndividualizado;
+import es.uco.pw.business.Anuncios.AnuncioTematico;
+import es.uco.pw.business.Usuario.Contacto;
+import es.uco.pw.data.dao.common.DAO;
 
 public class AnuncioDAO extends DAO{
    //TODO modificar llamadas a las insercciones para usar DTO en vez de clases anuncios

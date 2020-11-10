@@ -1,4 +1,4 @@
-package business.Anuncios;
+package es.uco.pw.business.Anuncios;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,9 +8,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-import business.Usuario.Contacto;
-import business.Usuario.GestorContactos;
-import data.dao.Anuncios.AnuncioDAO;
+import es.uco.pw.business.Usuario.Contacto;
+import es.uco.pw.business.Usuario.GestorContactos;
+import es.uco.pw.data.dao.Anuncios.AnuncioDAO;
 
 public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 

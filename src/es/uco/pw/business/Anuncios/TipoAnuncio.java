@@ -1,4 +1,4 @@
-package business.Anuncios;
+package es.uco.pw.business.Anuncios;
 
 public enum TipoAnuncio {
     Tematico,

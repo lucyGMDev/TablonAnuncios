@@ -1,4 +1,4 @@
-package data.dao.common;
+package es.uco.pw.data.dao.common;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

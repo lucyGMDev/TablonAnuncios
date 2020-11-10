@@ -1,4 +1,4 @@
-package business.Usuario;
+package es.uco.pw.business.Usuario;
 
 import java.util.Date;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package data.dao.Usuario;
+package es.uco.pw.data.dao.Usuario;
 
-import data.dao.common.DAO;
+import es.uco.pw.data.dao.common.DAO;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.Hashtable;
 import java.util.Properties;
 
-import business.Usuario.Contacto;
+import es.uco.pw.business.Usuario.Contacto;
 
 public class ContactoDAO extends DAO {
     public int InsertarContacto(Contacto contact){
