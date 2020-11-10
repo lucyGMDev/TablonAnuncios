@@ -8,11 +8,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import es.uco.pw.business.Anuncios.AnuncioFlash;
-import es.uco.pw.business.Anuncios.AnuncioIndividualizado;
 import es.uco.pw.business.Anuncios.AnuncioTematico;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioFlashDTO;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioGeneralDTO;
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioIndividualizadoDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.data.dao.common.DAO;
 
@@ -159,7 +158,7 @@ public class AnuncioDAO extends DAO{
     }
 
 
-    public int InsertarAnuncioIndividualizado(AnuncioIndividualizado anuncio){
+    public int InsertarAnuncioIndividualizado(AnuncioIndividualizadoDTO anuncio){
         int status=0;
 
         try{
@@ -169,12 +168,12 @@ public class AnuncioDAO extends DAO{
             sqlProp.load(is);
             PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("insertar.AnuncioIndividualizado"));
             ps.setString(1, anuncio.getTipoAnuncio().toString());
-            ps.setString(2,anuncio.getTituloAnuncio());
-            ps.setString(3,anuncio.getCuerpoAnuncio());
+            ps.setString(2,anuncio.getTitulo());
+            ps.setString(3,anuncio.getCuerpo());
             java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
             ps.setDate(4, fechaPublicacion);
             ps.setString(5,anuncio.getPropietario().getEmail());
-            ps.setString(6,anuncio.getEsadoAnuncio().toString());
+            ps.setString(6,anuncio.getEstadoAnuncio().toString());
             status=ps.executeUpdate();
 
             int idAnuncio=GetMaxID();

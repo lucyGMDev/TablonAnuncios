@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioFlashDTO;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioGeneralDTO;
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioIndividualizadoDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.business.Usuario.GestorContactos;
 import es.uco.pw.data.dao.Anuncios.AnuncioDAO;
@@ -435,15 +436,15 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
-        anuncio = new AnuncioIndividualizado(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
-
+        
+        AnuncioIndividualizadoDTO anuncioDTO = new AnuncioIndividualizadoDTO(titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
  
         
-        anuncioDAO.InsertarAnuncioIndividualizado(anuncio);
+        anuncioDAO.InsertarAnuncioIndividualizado(anuncioDTO);
 
         
         id=anuncioDAO.GetMaxID();
-        anuncio.setId(id);
+        anuncio = new AnuncioIndividualizado(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
 
         sc.close();
         return anuncio;
