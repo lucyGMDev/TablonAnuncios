@@ -65,9 +65,11 @@ public class AnuncioDAO extends DAO{
             for(String interes : anuncio.getTemasAnuncio()){
                 interes+=interes.toLowerCase()+",";
             }
-            if(anuncio.getTemasAnuncio().size()>0){
+            if(intereses.length()>0){
+                
                 intereses=intereses.substring(0,intereses.length()-1);
             }
+            System.out.println("Los intereses son: "+intereses);
             ps.setString(7, intereses);
 
             status=ps.executeUpdate();

@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ import es.uco.pw.business.DTO.DTOAnuncio.AnuncioIndividualizadoDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.business.Usuario.GestorContactos;
 import es.uco.pw.data.dao.Anuncios.AnuncioDAO;
+import es.uco.pw.data.dao.Intereses.InteresesDAO;
 
 public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
@@ -103,14 +106,46 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
 
         ArrayList<String>temas = new ArrayList<String>();
-        //TODO hacer temas
+        InteresesDAO interesesDAO = new InteresesDAO();
+        Hashtable<Integer,String> listaIntereses = interesesDAO.DevolverIntereses();
+        boolean insertarTemas=true;
+        do{
+            System.out.println("Introduzca un tema o escriba -1 para salir");
+            Enumeration<Integer> e=listaIntereses.keys();
+            while(e.hasMoreElements()){
+                int key = e.nextElement();
+                System.out.println(key+" - "+listaIntereses.get(key));
+            }
+            int opcion= Integer.parseInt(sc.nextLine());
+            if(opcion==-1){
+                if(temas.size()>0){
+                    insertarTemas=false;
+                }else{
+                    System.out.println("Tienes que añadir almenos un tema");
+                }
+            }else{
+                
+                if(listaIntereses.containsKey(opcion)){
+                    String interes=listaIntereses.get(opcion);
+                    if(temas.contains(interes)){
+                        System.out.println("Ya has introducido ese interes");
+                    }else{
+                        temas.add(interes);
+                    }
+                }else{
+                    System.out.println("Has introducido una opcion desconocida");
+                }
+            }
+            
+
+        }while(insertarTemas);
         
         int id=0;
         
         AnuncioDAO anuncioDAO=new AnuncioDAO();
         
 
-
+        //TODO no se insertan los temas
         AnuncioTematico anuncio= new AnuncioTematico(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios, temas);
         
         
