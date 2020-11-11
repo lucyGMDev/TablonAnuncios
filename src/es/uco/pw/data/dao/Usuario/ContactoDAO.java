@@ -104,7 +104,6 @@ public class ContactoDAO extends DAO {
             ResultSet rs=ps.executeQuery();
                  
             while(rs.next()){
-                System.out.println("Entro");
                 String _email=rs.getString(1);
                 String _nombre=rs.getString(2);
                 String _apellidos=rs.getString(3);

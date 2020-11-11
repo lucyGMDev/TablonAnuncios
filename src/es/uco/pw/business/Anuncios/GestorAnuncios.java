@@ -1,8 +1,11 @@
 package es.uco.pw.business.Anuncios;
 
+import java.util.Hashtable;
 import java.util.Scanner;
 
+import es.uco.pw.business.DTO.DTOAnuncio.AnuncioDTO;
 import es.uco.pw.business.Usuario.Contacto;
+import es.uco.pw.data.dao.Anuncios.AnuncioDAO;
 
 public class GestorAnuncios {
     public void CrearAnuncio(Contacto usuario){
@@ -14,7 +17,7 @@ public class GestorAnuncios {
         System.out.println("2-Anuncio Tematico");
         System.out.println("3-Anuncio Flash");
         System.out.println("4-Anuncio Individualizado");
-        System.out.println("-1 -Cancelar");
+        System.out.println("-1-Cancelar");
         int opcion = Integer.parseInt(sc.nextLine());
         switch(opcion){
             case 1:
@@ -43,5 +46,11 @@ public class GestorAnuncios {
         }
 
         sc.close();
+    }
+    public Hashtable<Integer,AnuncioDTO> ObtenerAnunciosUsuario(Contacto contacto){
+        AnuncioDAO anuncioDAO = new AnuncioDAO();
+        Hashtable<Integer,AnuncioDTO> ret=anuncioDAO.ObtenerAnunciosUsuario(contacto.getEmail());
+        
+        return ret;
     }
 }
