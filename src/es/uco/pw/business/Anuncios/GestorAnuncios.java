@@ -1,0 +1,47 @@
+package es.uco.pw.business.Anuncios;
+
+import java.util.Scanner;
+
+import es.uco.pw.business.Usuario.Contacto;
+
+public class GestorAnuncios {
+    public void CrearAnuncio(Contacto usuario){
+
+        Scanner sc= new Scanner(System.in);
+        GeneradorAnuncios generadorAnuncios=new GeneradorAnuncios();
+        System.out.println("Que tipo de anuncio desea crear: ");
+        System.out.println("1-Anuncio General");
+        System.out.println("2-Anuncio Tematico");
+        System.out.println("3-Anuncio Flash");
+        System.out.println("4-Anuncio Individualizado");
+        System.out.println("-1 -Cancelar");
+        int opcion = Integer.parseInt(sc.nextLine());
+        switch(opcion){
+            case 1:
+                System.out.println("Se va a generar un anuncio general");
+                generadorAnuncios.CrearAnuncioGeneral(usuario);
+            break;
+            case 2:
+                System.out.println("Se va a generar un anuncio tematico");
+                generadorAnuncios.CrearAnuncioTematico(usuario);
+            break;
+            case 3:
+                System.out.println("Se va a generar un anuncio flash");
+                generadorAnuncios.CrearAnuncioFlash(usuario);
+            break;
+            case 4:
+                System.out.println("Se va a generar un anuncio individualizado");
+                generadorAnuncios.CrearAnuncioIndividualizado(usuario);
+            break;
+            case -1:
+                sc.close();
+                return;
+            
+            default:
+                System.out.println("Opción no contemplada");
+            break;
+        }
+
+        sc.close();
+    }
+}
