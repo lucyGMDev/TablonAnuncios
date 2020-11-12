@@ -50,7 +50,7 @@ public class TablonAnuncios {
                 System.out.println("Estas desconectado, debe loguearse para acceder al tablon");
                 System.out.println("1-Login");
                 System.out.println("2-Registrarse");
-                System.out.println("3-Salir");
+                System.out.println("-1-Salir");
                 int opcion= Integer.parseInt(sc.nextLine());
         
                 switch(opcion){
@@ -60,7 +60,7 @@ public class TablonAnuncios {
                     case 2:
                         tablon.SingUp();
                     break;
-                    case 3:
+                    case -1:
                         sc.close();
                     return;
                 }
