@@ -314,4 +314,22 @@ public class AnuncioDAO extends DAO{
         return destinatarios;
     }
 
+    public int ArchivarAnuncio(int id){
+        int status=0;
+        try{
+            Connection conect = getConection();
+            Properties sqlProp = new Properties();
+            InputStream is = new FileInputStream("sql.properties");
+            sqlProp.load(is);
+            PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("archivarId.Anuncio"));
+            ps.setInt(1, id);
+            status=ps.executeUpdate();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
 }

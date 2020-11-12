@@ -1,6 +1,7 @@
 package es.uco.pw.display;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -140,7 +141,8 @@ public class TablonAnuncios {
     public void MostrarTodosAnuncios(){
         GestorAnuncios gestorAnuncios = new GestorAnuncios();
         Hashtable<Integer,AnuncioDTO> anuncios = gestorAnuncios.MostrarTablonAnuncio();
-        
+        //TODO este codigo de seleccion de anuncio deberia ir en el gestor anuncios
+        //Aqui solo deberia imprimirse los mensajes
         Enumeration<Integer> anuncio=anuncios.keys();
         while(anuncio.hasMoreElements()){
             int key = anuncio.nextElement();
@@ -155,8 +157,13 @@ public class TablonAnuncios {
             if(anuncioDTO.getTipo().equals(TipoAnuncio.General)){
                 System.out.println(anuncioDTO.toString());
             }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Flash)){
-                //TODO si se ve que ha caducado se archiva
-            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Individualizado)){
+                if(anuncioDTO.getFechaFin().before(new Date())){
+                    gestorAnuncios.ArchivarAnuncio(anuncioDTO.getId());
+                    continue;
+                }else{
+                    System.out.println(anuncioDTO.toString());
+                }
+            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Tematico)){
                 for(String tema:anuncioDTO.getTemas()){
                     if(this.usuario.getTagsLists().contains(tema)){
                         System.out.println(anuncioDTO.toString());

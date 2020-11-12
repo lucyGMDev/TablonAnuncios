@@ -73,4 +73,10 @@ public class GestorAnuncios {
         return anuncioDAO.ObtenerDestinatariosAnuncio(id);
     }
 
+    public void ArchivarAnuncio(int id){
+        AnuncioDAO anuncioDAO = new AnuncioDAO();
+        anuncioDAO.ArchivarAnuncio(id);
+        return;
+    }
+
 }
