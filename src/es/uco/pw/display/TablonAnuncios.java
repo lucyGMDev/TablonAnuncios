@@ -1,10 +1,13 @@
 package es.uco.pw.display;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Scanner;
 
+import es.uco.pw.business.Anuncios.EstadoAnuncio;
 import es.uco.pw.business.Anuncios.GestorAnuncios;
+import es.uco.pw.business.Anuncios.TipoAnuncio;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.business.Usuario.GestorContactos;
@@ -22,6 +25,7 @@ public class TablonAnuncios {
                 System.out.println("2-Mostrar los anuncios que has creado");
                 System.out.println("3-Añadir anuncio");
                 System.out.println("4-Borrar anuncio");
+                System.out.println("5-Mostrar Tablon");
                 System.out.println("-1-Salir");
                 int opcion=Integer.parseInt(sc.nextLine());
                 
@@ -132,6 +136,44 @@ public class TablonAnuncios {
   
         gestorAnuncios.BorrarAnuncioId(idAnuncio);
     }
+
+    public void MostrarTodosAnuncios(){
+        GestorAnuncios gestorAnuncios = new GestorAnuncios();
+        Hashtable<Integer,AnuncioDTO> anuncios = gestorAnuncios.MostrarTablonAnuncio();
+        
+        Enumeration<Integer> anuncio=anuncios.keys();
+        while(anuncio.hasMoreElements()){
+            int key = anuncio.nextElement();
+            AnuncioDTO anuncioDTO = anuncios.get(key);
+            if(anuncioDTO.getEstadoAnuncio().equals(EstadoAnuncio.archivado)){
+                continue;
+            }
+            if(anuncioDTO.getEmailPropietario().equals(this.usuario.getEmail())){
+                System.out.println(anuncioDTO.toString());
+                continue;
+            }
+            if(anuncioDTO.getTipo().equals(TipoAnuncio.General)){
+                System.out.println(anuncioDTO.toString());
+            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Flash)){
+                //TODO si se ve que ha caducado se archiva
+            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Individualizado)){
+                for(String tema:anuncioDTO.getTemas()){
+                    if(this.usuario.getTagsLists().contains(tema)){
+                        System.out.println(anuncioDTO.toString());
+                        break;
+                    }
+                }                
+            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Individualizado)){
+                ArrayList<String> destinatarios=gestorAnuncios.ObtenerDestinatariosAnuncio(anuncioDTO.getId());
+                if(destinatarios.contains(this.usuario.getEmail())){
+                    System.out.println(anuncioDTO);
+                }
+            }
+        }
+        
+    }
+
+
 }
 
 

@@ -258,4 +258,60 @@ public class AnuncioDAO extends DAO{
         return status;
     }
 
+    public Hashtable<Integer, AnuncioDTO> ObtenerAnuncios(){
+        Hashtable<Integer, AnuncioDTO> ret=new Hashtable<Integer, AnuncioDTO>();
+
+        try{
+            Connection conect = getConection();
+            Properties sqlProp = new Properties();
+            InputStream is = new FileInputStream("sql.properties");
+            sqlProp.load(is);
+            PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("getAll.Anuncio"));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt(1);
+                TipoAnuncio tipoAnuncio=TipoAnuncio.valueOf(rs.getString(2));
+                String titulo = rs.getString(3);
+                String cuerpo = rs.getString(4);
+                Date fechaPublicacion = new Date(rs.getDate(5).getTime());
+                Date fechaFin=null;
+                if(tipoAnuncio.equals(TipoAnuncio.Flash)){
+                    fechaFin= new Date(rs.getDate(6).getTime());
+                }
+                String emailPropietario = rs.getString(7);
+                EstadoAnuncio estadoAnuncio = EstadoAnuncio.valueOf(rs.getString(8));
+                
+                ArrayList<String>temas = null;
+                if(tipoAnuncio.equals(TipoAnuncio.Tematico))
+                    temas=new ArrayList<String>(Arrays.asList(rs.getString(9).split(",")));
+                
+                AnuncioDTO anuncioDTO=new AnuncioDTO(id, tipoAnuncio, titulo, cuerpo, fechaPublicacion, fechaFin, emailPropietario, estadoAnuncio, temas);
+
+                ret.put(id, anuncioDTO);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public ArrayList<String> ObtenerDestinatariosAnuncio(int id){
+        ArrayList<String> destinatarios = new ArrayList<String>();
+        try{
+            Connection conect = getConection();
+            Properties sqlProp = new Properties();
+            InputStream is = new FileInputStream("sql.properties");
+            sqlProp.load(is);
+            PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("obtenerById.Destinatario"));
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                destinatarios.add(rs.getString(1));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return destinatarios;
+    }
+
 }

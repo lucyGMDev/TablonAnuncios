@@ -1,5 +1,6 @@
 package es.uco.pw.business.Anuncios;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 
@@ -59,4 +60,17 @@ public class GestorAnuncios {
         anuncioDAO.BorrarAnuncioID(id);
 
     }
+
+    public Hashtable<Integer,AnuncioDTO> MostrarTablonAnuncio(){
+        AnuncioDAO anuncioDAO = new AnuncioDAO();
+        Hashtable<Integer,AnuncioDTO> anuncios=anuncioDAO.ObtenerAnuncios();
+        
+        return anuncios;
+    }
+
+    public ArrayList<String> ObtenerDestinatariosAnuncio(int id){
+        AnuncioDAO anuncioDAO=new AnuncioDAO();
+        return anuncioDAO.ObtenerDestinatariosAnuncio(id);
+    }
+
 }
