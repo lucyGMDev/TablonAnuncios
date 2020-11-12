@@ -201,7 +201,7 @@ public class AnuncioDAO extends DAO{
         return status;
     }
 
-
+    
     public Hashtable<Integer, AnuncioDTO> ObtenerAnunciosUsuario(String email){
         Hashtable<Integer,AnuncioDTO> ret = new Hashtable<Integer,AnuncioDTO>();
         try{
@@ -238,4 +238,24 @@ public class AnuncioDAO extends DAO{
         }
         return ret;
     }
+
+    public int BorrarAnuncioID(int id){
+        int status=0;
+        try{
+            Connection conect = getConection();
+            Properties sqlProp = new Properties();
+            InputStream is = new FileInputStream("sql.properties");
+            sqlProp.load(is); 
+            PreparedStatement psDestinados = conect.prepareStatement(sqlProp.getProperty("borrar.Destinatario"));
+            psDestinados.setInt(1, id);
+            psDestinados.executeUpdate();
+            PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("borrarId.Anuncio"));
+            ps.setInt(1, id);
+            status=ps.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return status;
+    }
+
 }

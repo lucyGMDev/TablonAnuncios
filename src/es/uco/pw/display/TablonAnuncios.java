@@ -35,6 +35,9 @@ public class TablonAnuncios {
                     case 3:
                         tablon.CrearAnuncio();
                     break;
+                    case 4:
+                        tablon.BorrarAnuncios();
+                    break;
                     case -1:
                         sc.close();
                         return;
@@ -80,9 +83,6 @@ public class TablonAnuncios {
         }else{
             System.out.println("El email introducido no se corresponde con el de ningun usuario");
         }
-        
-       
-
     }
 
     public void LogOut(){
@@ -110,6 +110,7 @@ public class TablonAnuncios {
             System.out.println("/****************************************************/");
             System.out.println(anuncios.get(key).toString());
         }
+        System.out.println("/****************************************************/");
     }
 
     public void CrearAnuncio(){
@@ -119,6 +120,17 @@ public class TablonAnuncios {
 
     public void SingUp(){
         this.usuario=GestorContactos.GetInstance().AddContact();
+    }
+
+    public void BorrarAnuncios(){
+        GestorAnuncios gestorAnuncios = new GestorAnuncios();
+        Scanner sc = new Scanner(System.in);
+        MostrarAnunciosUsuario();
+        System.out.println("Introduce el id del anuncio que quieres borrar");
+        int idAnuncio=Integer.parseInt(sc.nextLine());
+
+  
+        gestorAnuncios.BorrarAnuncioId(idAnuncio);
     }
 }
 

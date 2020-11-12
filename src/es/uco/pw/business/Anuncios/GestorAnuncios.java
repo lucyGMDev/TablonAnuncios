@@ -53,4 +53,10 @@ public class GestorAnuncios {
         
         return ret;
     }
+
+    public void BorrarAnuncioId(int id){
+        AnuncioDAO anuncioDAO = new AnuncioDAO();
+        anuncioDAO.BorrarAnuncioID(id);
+
+    }
 }
