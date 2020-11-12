@@ -9,6 +9,7 @@ import es.uco.pw.business.DTO.DTOAnuncio.AnuncioDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.business.Usuario.GestorContactos;
 
+
 public class TablonAnuncios {
     Contacto usuario;
     public static void main(String args[]){
@@ -19,8 +20,11 @@ public class TablonAnuncios {
                 System.out.println("Que desea hacer");
                 System.out.println("1-Cerrar sesion");
                 System.out.println("2-Mostrar los anuncios que has creado");
+                System.out.println("3-Añadir anuncio");
+                System.out.println("4-Borrar anuncio");
                 System.out.println("-1-Salir");
                 int opcion=Integer.parseInt(sc.nextLine());
+                
                 switch(opcion){
                     case 1:
                         tablon.LogOut();
@@ -28,8 +32,11 @@ public class TablonAnuncios {
                     case 2:
                         tablon.MostrarAnunciosUsuario();
                     break;
+                    case 3:
+                        tablon.CrearAnuncio();
+                    break;
                     case -1:
-                        
+                        sc.close();
                         return;
                     
                 }
@@ -39,15 +46,20 @@ public class TablonAnuncios {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Estas desconectado, debe loguearse para acceder al tablon");
                 System.out.println("1-Login");
-                System.out.println("2-Salir");
+                System.out.println("2-Registrarse");
+                System.out.println("3-Salir");
                 int opcion= Integer.parseInt(sc.nextLine());
+        
                 switch(opcion){
                     case 1:
                         tablon.LogIn();
                     break;
                     case 2:
-                        
-                        return;
+                        tablon.SingUp();
+                    break;
+                    case 3:
+                        sc.close();
+                    return;
                 }
                 
             }
@@ -57,10 +69,11 @@ public class TablonAnuncios {
 
 
     public void LogIn(){
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         GestorContactos gestorContactos = new GestorContactos();
         System.out.println("Introduzca su email");
         String email=sc.nextLine();
+        
         if(gestorContactos.ContactExits(email)){
             this.usuario=gestorContactos.GetContactById(email);
             System.out.println("Se ha establecido la conexion con el usuario de email "+usuario.getEmail());
@@ -97,6 +110,15 @@ public class TablonAnuncios {
             System.out.println("/****************************************************/");
             System.out.println(anuncios.get(key).toString());
         }
+    }
+
+    public void CrearAnuncio(){
+        GestorAnuncios gestorAnuncios= new GestorAnuncios();
+        gestorAnuncios.CrearAnuncio(this.usuario);
+    }
+
+    public void SingUp(){
+        this.usuario=GestorContactos.GetInstance().AddContact();
     }
 }
 

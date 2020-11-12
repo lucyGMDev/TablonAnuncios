@@ -21,14 +21,14 @@ public class GestorContactos {
         return instance;
     }
 
-    public void AddContact(){
+    public Contacto AddContact(){
         Contacto contact=new Contacto("i92izded@uco.es","Lucia","Izquierdo Delgado",new Date(),new ArrayList<String>());         
 
 
         AddContact(contact);
 
         System.out.println("Se ha añadido el contacto con email "+contact.getEmail());
-        return;
+        return contact;
     }
 
     public void AddContact(Contacto contact){
