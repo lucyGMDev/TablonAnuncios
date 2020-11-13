@@ -64,7 +64,7 @@ public class GestorAnuncios {
 
     public void BorrarAnuncioId(int id){
         AnuncioDAO anuncioDAO = new AnuncioDAO();
-        anuncioDAO.BorrarAnuncioID(id);
+        anuncioDAO.ArchivarAnuncio(id);
 
     }
 

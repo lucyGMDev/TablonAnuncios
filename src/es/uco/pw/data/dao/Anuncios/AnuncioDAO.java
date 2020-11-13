@@ -210,6 +210,7 @@ public class AnuncioDAO extends DAO{
             sqlProp.load(is);
             PreparedStatement ps = conect.prepareStatement(sqlProp.getProperty("getByEmailPropietario.Anuncio"));
             ps.setString(1, email);
+            ps.setString(2, EstadoAnuncio.archivado.toString());
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 int id=rs.getInt(1);

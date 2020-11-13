@@ -67,7 +67,7 @@ public class TablonAnuncios {
                         tablon.LogIn();
                     break;
                     case 2:
-                        tablon.SingUp();
+                        tablon.SignUp();
                     break;
                     case -1:
                         sc.close();
@@ -128,7 +128,7 @@ public class TablonAnuncios {
         gestorAnuncios.CrearAnuncio(this.usuario);
     }
 
-    public void SingUp(){
+    public void SignUp(){
         this.usuario=GestorContactos.GetInstance().AddContact();
     }
 
@@ -160,9 +160,11 @@ public class TablonAnuncios {
         Scanner sc = new Scanner(System.in);
         GestorAnuncios gestorAnuncios = new GestorAnuncios();
         MostrarAnunciosUsuario();
-        System.out.println("Indique que anuncio desea modificar");
+        System.out.println("Indique que anuncio desea modificar o -1 para salir");
         int id=Integer.parseInt(sc.nextLine());
-
+        if(id == -1){
+            return;
+        }
         gestorAnuncios.ModificarAnuncio(id);
     }
 
