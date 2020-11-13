@@ -23,9 +23,9 @@ public class AnuncioDTO implements Serializable {
     private String emailPropietario;
     private EstadoAnuncio estadoAnuncio;
     private ArrayList<String> temas;
-
+    private ArrayList<String> destinatarios;
     public AnuncioDTO(int id, TipoAnuncio tipo, String titulo, String cuerpo, Date fechaPublicacion, Date fechaFin,
-            String emailPropietario, EstadoAnuncio estadoAnuncio, ArrayList<String> temas) {
+            String emailPropietario, EstadoAnuncio estadoAnuncio, ArrayList<String> temas,ArrayList<String>destinatarios) {
         this.id = id;
         this.tipo = tipo;
         this.titulo = titulo;
@@ -35,6 +35,7 @@ public class AnuncioDTO implements Serializable {
         this.emailPropietario = emailPropietario;
         this.estadoAnuncio = estadoAnuncio;
         this.temas = temas;
+        this.destinatarios=destinatarios;
     }
 
     public int getId() {
@@ -120,7 +121,21 @@ public class AnuncioDTO implements Serializable {
                 cadena+="\t"+tema+"\n";
             }
         }
+        if(!this.destinatarios.isEmpty()){
+            cadena+="Los destinatarios del anunco son: "+"\n";
+            for(String destinatarios:this.destinatarios){
+                cadena+="\t"+destinatarios+"\n";
+            }
+        }
         return cadena;
+    }
+
+    public ArrayList<String> getDestinatarios() {
+        return destinatarios;
+    }
+
+    public void setDestinatarios(ArrayList<String> destinatarios) {
+        this.destinatarios = destinatarios;
     }
     
     

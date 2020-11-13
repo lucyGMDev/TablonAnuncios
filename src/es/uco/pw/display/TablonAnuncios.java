@@ -1,14 +1,11 @@
 package es.uco.pw.display;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Scanner;
 
-import es.uco.pw.business.Anuncios.EstadoAnuncio;
 import es.uco.pw.business.Anuncios.GestorAnuncios;
-import es.uco.pw.business.Anuncios.TipoAnuncio;
 import es.uco.pw.business.DTO.DTOAnuncio.AnuncioDTO;
 import es.uco.pw.business.Usuario.Contacto;
 import es.uco.pw.business.Usuario.GestorContactos;
@@ -27,6 +24,7 @@ public class TablonAnuncios {
                 System.out.println("3-Añadir anuncio");
                 System.out.println("4-Borrar anuncio");
                 System.out.println("5-Mostrar Tablon");
+                System.out.println("6-Modificar Anuncio");
                 System.out.println("-1-Salir");
                 int opcion=Integer.parseInt(sc.nextLine());
                 
@@ -42,6 +40,12 @@ public class TablonAnuncios {
                     break;
                     case 4:
                         tablon.BorrarAnuncios();
+                    break;
+                    case 5:
+                        tablon.MostrarTablonUsuario();
+                    break;
+                    case 6:
+                        tablon.ModificarAnuncio();
                     break;
                     case -1:
                         sc.close();
@@ -108,6 +112,7 @@ public class TablonAnuncios {
 
     public void MostrarAnunciosUsuario(){
         GestorAnuncios gestorAnuncios = new GestorAnuncios();
+        
         Hashtable<Integer,AnuncioDTO> anuncios=gestorAnuncios.ObtenerAnunciosUsuario(this.usuario);
         Enumeration<Integer> anuncio=anuncios.keys();
         while(anuncio.hasMoreElements()){
@@ -138,48 +143,30 @@ public class TablonAnuncios {
         gestorAnuncios.BorrarAnuncioId(idAnuncio);
     }
 
-    public void MostrarTodosAnuncios(){
+    public void MostrarTablonUsuario(){
         GestorAnuncios gestorAnuncios = new GestorAnuncios();
-        Hashtable<Integer,AnuncioDTO> anuncios = gestorAnuncios.MostrarTablonAnuncio();
-        //TODO este codigo de seleccion de anuncio deberia ir en el gestor anuncios
-        //Aqui solo deberia imprimirse los mensajes
-        Enumeration<Integer> anuncio=anuncios.keys();
-        while(anuncio.hasMoreElements()){
-            int key = anuncio.nextElement();
-            AnuncioDTO anuncioDTO = anuncios.get(key);
-            if(anuncioDTO.getEstadoAnuncio().equals(EstadoAnuncio.archivado)){
-                continue;
-            }
-            if(anuncioDTO.getEmailPropietario().equals(this.usuario.getEmail())){
-                System.out.println(anuncioDTO.toString());
-                continue;
-            }
-            if(anuncioDTO.getTipo().equals(TipoAnuncio.General)){
-                System.out.println(anuncioDTO.toString());
-            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Flash)){
-                if(anuncioDTO.getFechaFin().before(new Date())){
-                    gestorAnuncios.ArchivarAnuncio(anuncioDTO.getId());
-                    continue;
-                }else{
-                    System.out.println(anuncioDTO.toString());
-                }
-            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Tematico)){
-                for(String tema:anuncioDTO.getTemas()){
-                    if(this.usuario.getTagsLists().contains(tema)){
-                        System.out.println(anuncioDTO.toString());
-                        break;
-                    }
-                }                
-            }else if(anuncioDTO.getTipo().equals(TipoAnuncio.Individualizado)){
-                ArrayList<String> destinatarios=gestorAnuncios.ObtenerDestinatariosAnuncio(anuncioDTO.getId());
-                if(destinatarios.contains(this.usuario.getEmail())){
-                    System.out.println(anuncioDTO);
-                }
-            }
+        ArrayList<AnuncioDTO> tablonUsuario=gestorAnuncios.ObtenerTablonUsuario(this.usuario);
+        for(AnuncioDTO anuncio : tablonUsuario){
+            System.out.println("/****************************************************/");
+            System.out.println(anuncio.toString());
         }
+        System.out.println("/****************************************************/");
+        
+        return;     
         
     }
 
+    public void ModificarAnuncio(){
+        Scanner sc = new Scanner(System.in);
+        GestorAnuncios gestorAnuncios = new GestorAnuncios();
+        MostrarAnunciosUsuario();
+        System.out.println("Indique que anuncio desea modificar");
+        int id=Integer.parseInt(sc.nextLine());
+
+        gestorAnuncios.ModificarAnuncio(id);
+    }
+
+    
 
 }
 

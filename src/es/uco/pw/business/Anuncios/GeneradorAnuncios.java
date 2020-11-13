@@ -51,7 +51,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             fechaPublicacion = dateFormat.parse(fechaString);
         } catch (ParseException e) {
             e.printStackTrace();
-            sc.close();
+           
             return null;
         }
         
@@ -119,7 +119,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
 
         }while(insertarTemas);
 
-        System.out.println(temas);
+        
         EstadoAnuncio estadoAnuncio;
         System.out.println("Quieres guardar el anuncio en estado edicion o publicarlo");
         System.out.println("1: Publicar");
@@ -139,7 +139,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             break;
             default:
                 System.out.println("Opcion no contempladad");
-                sc.close();
+           
                 return null;
             
         }
@@ -159,7 +159,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         
 
         
-        sc.close();
+   
 
         return anuncio;
     }
@@ -195,7 +195,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             fechaPublicacion = dateFormat.parse(fechaString);
         } catch (ParseException e) {
             e.printStackTrace();
-            sc.close();
+  
             return null;
         }
         
@@ -243,7 +243,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             break;
             default:
                 System.out.println("Opcion no contempladad");
-                sc.close();
+             
                 return null;
             
         }
@@ -261,7 +261,6 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         int id=anuncioDAO.GetMaxID();
         anuncio = new AnuncioGeneral(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
 
-        sc.close();
         return anuncio;
     }
 
@@ -296,7 +295,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             fechaPublicacion = dateFormat.parse(fechaString);
         } catch (ParseException e) {
             e.printStackTrace();
-            sc.close();
+           
             return null;
         }
 
@@ -311,7 +310,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
-                sc.close();
+
                 return null;
             }
         }while(fecha_fin.before(fechaPublicacion));  
@@ -363,7 +362,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             break;
             default:
                 System.out.println("Opcion no contempladad");
-                sc.close();
+
                 return null;
             
         }
@@ -379,7 +378,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         id=anuncioDAO.GetMaxID();
         anuncio = new AnuncioFlash(id, titulo, cuerpoAnuncio, fechaPublicacion,fecha_fin, propietario, estadoAnuncio, destinatarios);
 
-        sc.close();
+
         return anuncio;
 
 
@@ -415,7 +414,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             fechaPublicacion = dateFormat.parse(fechaString);
         } catch (ParseException e) {
             e.printStackTrace();
-            sc.close();
+
             return null;
         }
         
@@ -467,7 +466,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
             break;
             default:
                 System.out.println("Opcion no contempladad");
-                sc.close();
+          
                 return null;
             
         }
@@ -486,7 +485,7 @@ public class GeneradorAnuncios extends GeneradorAnunciosAbstracto {
         id=anuncioDAO.GetMaxID();
         anuncio = new AnuncioIndividualizado(id, titulo, cuerpoAnuncio, fechaPublicacion, propietario, estadoAnuncio, destinatarios);
 
-        sc.close();
+
         return anuncio;
     }
     
