@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Locale;
-
+import java.text.ParseException; //Para manejar el parse de la fecha de nacimiento
 import es.uco.pw.data.dao.Usuario.ContactoDAO;
 
 
@@ -22,8 +22,40 @@ public class GestorContactos {
     }
 
     public Contacto AddContact(){
-        Contacto contact=new Contacto("i92izded@uco.es","Lucia","Izquierdo Delgado",new Date(),new ArrayList<String>());         
+        
+        Scanner in= new Scanner(System.in);
 
+        System.out.println("Introduzca sus datos de contacto");
+
+        System.out.print("Correo: ")
+
+        String email=in.nextLine();
+
+        System.out.print("Nombre: ")
+
+        String nombre=in.nextLine();
+
+        System.out.print("Apellidos: ")
+
+        String apellidos=in.nextLine();
+
+        System.out.print("Fecha de nacimiento (dd-mm-aaaa): ")
+        String fecha_string=in.nextLine();
+        SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
+
+        try
+        {
+             Date fecha_nacimiento=sdf.parse(fecha_string);
+        }
+
+        catch(ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        String intereses="por poner algo xd"; //No sé cómo pedir los intereses
+       
+     Contacto contact=new Contacto(email,nombre,apellidos,fecha_nacimiento,intereses); //
 
         AddContact(contact);
 
@@ -42,7 +74,15 @@ public class GestorContactos {
     }
 
     public void RemoveContact(){
-        Contacto contact=new Contacto("i92izded@uco.es","Lucia","Izquierdo Delgado",new Date(),new ArrayList<String>());         
+
+        Scanner in= new Scanner(System.in);
+
+        System.out.print("Correo del usuario a eliminar: ")
+
+        String email=in.nextLine();
+        
+       Contacto contact= GetContactById(email);
+
         RemoveContact(contact);
         System.out.println("Se ha borrado el contacto con email "+contact.getEmail());
     }
@@ -52,7 +92,13 @@ public class GestorContactos {
         contactoDAO.BorrarContacto(contact);
     }
     public void UpdateContact(){
-        Contacto contact=new Contacto("i92izded@uco.es","Sofia","Izquierdo Delgado",new Date(),new ArrayList<String>());         
+
+         System.out.print("Correo del usuario a modificar: ")
+
+        String email=in.nextLine();
+        
+       Contacto contact= GetContactById(email);
+       
         UpdateContact(contact);
         System.out.println("Se ha modificado el contacto con email "+contact.getEmail());
     }
