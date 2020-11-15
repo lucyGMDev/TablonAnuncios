@@ -9,7 +9,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Scanner;
-import java.text.ParseException; //Para manejar el parse de la fecha de nacimiento
+import java.text.ParseException; 
 
 import es.uco.pw.business.DTO.DTOUsuario.ContactoDTO;
 import es.uco.pw.data.dao.Intereses.InteresesDAO;

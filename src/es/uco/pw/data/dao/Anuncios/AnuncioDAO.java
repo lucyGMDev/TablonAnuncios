@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -108,6 +110,9 @@ public class AnuncioDAO extends DAO{
             ps.setString(2,anuncio.getTitulo());
             ps.setString(3,anuncio.getCuerpo());
             java.sql.Date fechaPublicacion=new java.sql.Date(anuncio.getFechaPublicacion().getTime());
+            // DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            // String fecha = dateFormat.format(anuncio.getFechaPublicacion());
+            // java.sql.Date fechaPublicacion=new java.sql.Date(dateFormat.parse(fecha).getTime());
             ps.setDate(4, fechaPublicacion);
             ps.setString(5,anuncio.getPropietario().getEmail());
             ps.setString(6,anuncio.getEstadoAnuncio().toString());
