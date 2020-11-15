@@ -25,6 +25,7 @@ public class TablonAnuncios {
                 System.out.println("4-Borrar anuncio");
                 System.out.println("5-Mostrar Tablon");
                 System.out.println("6-Modificar Anuncio");
+                System.out.println("7-Modificar datos contacto");
                 System.out.println("-1-Salir");
                 int opcion=Integer.parseInt(sc.nextLine());
                 
@@ -46,6 +47,8 @@ public class TablonAnuncios {
                     break;
                     case 6:
                         tablon.ModificarAnuncio();
+                    break;
+                    case 7:
                     break;
                     case -1:
                         sc.close();
@@ -168,8 +171,9 @@ public class TablonAnuncios {
         gestorAnuncios.ModificarAnuncio(id);
     }
 
-    
-
+    public void ModificarDatosUsuario(){
+        GestorContactos.GetInstance().UpdateContact(this.usuario.getEmail());
+    }
 }
 
 

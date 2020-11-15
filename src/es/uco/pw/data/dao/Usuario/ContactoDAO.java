@@ -10,10 +10,11 @@ import java.sql.ResultSet;
 import java.util.Hashtable;
 import java.util.Properties;
 
+import es.uco.pw.business.DTO.DTOUsuario.ContactoDTO;
 import es.uco.pw.business.Usuario.Contacto;
 
 public class ContactoDAO extends DAO {
-    public int InsertarContacto(Contacto contact){
+    public int InsertarContacto(ContactoDTO contact){
         int status=0;
         try{
             Connection conect = getConection();
@@ -29,7 +30,7 @@ public class ContactoDAO extends DAO {
             
             String intereses="";            
             for(String interes : contact.getTagsLists()){
-                interes+=interes.toLowerCase()+",";
+                intereses+=interes.toLowerCase()+",";
             }
             if(contact.getTagsLists().size()>0){
                 intereses=intereses.substring(0,intereses.length()-1);
@@ -38,7 +39,7 @@ public class ContactoDAO extends DAO {
             
             status = ps.executeUpdate();
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         return status;
     }
