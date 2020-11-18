@@ -49,6 +49,7 @@ public class TablonAnuncios {
                         tablon.ModificarAnuncio();
                     break;
                     case 7:
+                        tablon.ModificarDatosUsuario();
                     break;
                     case -1:
                         sc.close();
